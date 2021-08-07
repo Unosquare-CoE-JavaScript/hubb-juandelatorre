@@ -5,8 +5,10 @@
   all: unset;
   appearance: revert;
   display: revert;
+  cursor: inherit;
   font: inherit;
   line-height: inherit;
+  user-select: inherit;
   box-sizing: border-box;
   vertical-align: baseline;
   margin: 0;
@@ -15,6 +17,8 @@
 
 :root {
   scroll-behavior: smooth;
+  cursor: default;
+  user-select: none;
 }
 
 body {

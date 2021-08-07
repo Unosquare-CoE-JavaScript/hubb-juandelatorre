@@ -6,16 +6,17 @@ import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
-    path: 'examples',
+    path: 'benchmarks',
     loadChildren: () =>
-      import('./examples/examples.module').then(m => m.ExamplesModule),
+      import('./benchmarks/benchmarks.module').then(m => m.BenchmarksModule),
   },
   {
     path: '',
     loadChildren: () =>
       import('./main/main.module').then(m => m.MainModule),
-  }
+  },
 ];
+
 @NgModule({
   declarations: [
     AppComponent,

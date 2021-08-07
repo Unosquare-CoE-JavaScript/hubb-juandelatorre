@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './main.component';
+import { BenchmarksComponent } from './benchmarks.component';
 import { AlgorithmsModule } from '../algorithms/algorithms.module';
 
 
 const routes: Routes = [
-  { path: '', component: MainComponent }
+  { path: '', component: BenchmarksComponent }
 ];
 
 @NgModule({
   declarations: [
-    MainComponent
+    BenchmarksComponent
   ],
   imports: [
     CommonModule,
@@ -19,4 +19,4 @@ const routes: Routes = [
     AlgorithmsModule,
   ]
 })
-export class MainModule { }
+export class BenchmarksModule { }
