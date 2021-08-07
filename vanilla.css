@@ -1,0 +1,161 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  all: unset;
+  appearance: revert;
+  display: revert;
+
+  cursor: inherit;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  user-select: inherit;
+
+  box-sizing: border-box;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  cursor: default;
+  user-select: none;
+  line-height: 1.5;
+  font-family: Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+q,
+blockquote {
+  quotes: none;
+}
+
+:where(blockquote, q)::before,
+:where(blockquote, q)::after {
+  content: '';
+  content: none;
+}
+
+/* Accessibility */
+a {
+  text-decoration-skip-ink: auto;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  :root {
+  scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1s !important;
+    transition-duration: 1s !important;
+  }
+}
+
+body {
+  background: linear-gradient(90deg, #2c8, #2bc);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: #fffa;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffa;
+  font-size: 1.8rem;
+  mix-blend-mode: screen;
+}
+
+nav a {
+  padding: .5rem 1rem;
+  color: #000;
+}
+
+nav a:hover {
+  color: #fffa;
+  background: #000;
+}
+
+main {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* overflow-y: scroll; */
+}
+
+section {
+  border-bottom: .1rem solid #fffa;
+  width: clamp(25rem, 50%, 40rem);
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+aside {
+  font-size: 1.2rem;
+}
+
+aside code {
+  display: block;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  mix-blend-mode: screen;
+  background: #fffa;
+  color: #000;
+  user-select: text;
+}
+
+textarea {
+  border: .1rem solid #fffa;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+
+textarea::placeholder {
+  color: inherit;
+}
+
+blockquote {
+  user-select: text;
+  border: .1rem solid #fffa;
+  padding: 1rem;
+  text-align: center;
+}

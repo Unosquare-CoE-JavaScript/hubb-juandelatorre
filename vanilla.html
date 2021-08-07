@@ -2,217 +2,8 @@
 <html>
   <head>
     <title>String Zipper</title>
-    <style>
-      /* Reset */
-      *,
-      *::before,
-      *::after {
-        all: unset;
-        appearance: revert;
-        display: revert;
-
-        cursor: inherit;
-        color: inherit;
-        font: inherit;
-        line-height: inherit;
-        user-select: inherit;
-
-        box-sizing: border-box;
-        vertical-align: baseline;
-        margin: 0;
-        padding: 0;
-      }
-
-      :root {
-        scroll-behavior: smooth;
-        text-rendering: optimizeSpeed;
-        cursor: default;
-        user-select: none;
-        line-height: 1.5;
-        font-family: Tahoma, sans-serif;
-      }
-
-      body {
-        min-height: 100vh;
-      }
-
-      ul,
-      ol {
-        list-style: none;
-      }
-
-      img,
-      picture {
-        display: block;
-        max-width: 100%;
-      }
-
-      table {
-        border-collapse: collapse;
-      }
-
-      q,
-      blockquote {
-        quotes: none;
-      }
-
-      :where(blockquote, q)::before,
-      :where(blockquote, q)::after {
-        content: '';
-        content: none;
-      }
-
-      /* Accessibility */
-      a {
-        text-decoration-skip-ink: auto;
-      }
-
-      @media screen and (prefers-reduced-motion: reduce) {
-        :root {
-        scroll-behavior: auto;
-        }
-
-        *,
-        *::before,
-        *::after {
-          animation-duration: 1s !important;
-          transition-duration: 1s !important;
-        }
-      }
-
-      body {
-        background: linear-gradient(90deg, #2c8, #2bc);
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        color: #fffa;
-      }
-
-      nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fffa;
-        font-size: 1.8rem;
-        mix-blend-mode: screen;
-      }
-
-      nav a {
-        padding: .5rem 1rem;
-        color: #000;
-      }
-
-      nav a:hover {
-        color: #fffa;
-        background: #000;
-      }
-
-      main {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        /* overflow-y: scroll; */
-      }
-
-      section {
-        border-bottom: .1rem solid #fffa;
-        width: clamp(25rem, 50%, 40rem);
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
-      }
-
-      h1 {
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-        font-weight: 500;
-      }
-
-      aside {
-        font-size: 1.2rem;
-      }
-
-      aside code {
-        display: block;
-        margin: 1rem;
-        padding: 1rem;
-        text-align: center;
-        mix-blend-mode: screen;
-        background: #fffa;
-        color: #000;
-        user-select: text;
-      }
-
-      textarea {
-        border: .1rem solid #fffa;
-        width: 100%;
-        padding: 1rem;
-        text-align: center;
-      }
-
-      textarea::placeholder {
-        color: inherit;
-      }
-
-      blockquote {
-        user-select: text;
-        border: .1rem solid #fffa;
-        padding: 1rem;
-        text-align: center;
-      }
-    </style>
-    <script>
-      addEventListener('load', () => {
-        const byId = document.getElementById.bind(document);
-        byId('Input1').addEventListener('input', ({ target }) => {
-          byId('Output1').innerText = target.value
-          .replace(/(\d+)/g, '*$1') // Escape groups of numbers
-          .replace(/([a-z])\1{2,}/ig, match => match[0] + match.length) // Compress
-        });
-
-        byId('Input2').addEventListener('input', ({ target }) => {
-          byId('Output2').innerText = [ ...target.value ]
-            .reduce((output, next) => {
-              const index = output.length - 1;
-              const last = output[index];
-              const current = { char: next, count: 1, isNumber: Number.isInteger(+next) };
-
-              if (last.char !== '') {
-                if (current.isNumber) { // Numeric character
-                  if (last.isNumber) {
-                    last.char += next; // Add to the same group
-                  } else {
-                    output.push(current); // Start new group of numbers
-                  }
-                } else if (last.char === next) { // Same character
-                  last.count++;
-                } else {
-                  output.push(current); // Start new group
-                }
-              } else {
-                output[index] = current; // First Character
-              }
-
-              return output;
-            }, [ { char: '', count: 0, isNumber: false } ])
-            .map(
-              (
-                { char, count, isNumber }
-              ) =>
-                isNumber ?
-                  `*${char}` : // Escape groups of numbers
-                  count > 2 ?
-                    `${char}${count}` : // Compress
-                    char.repeat(count) // Leave untouched
-            )
-            .join('');
-        });
-      });
-    </script>
+    <link rel="stylesheet" href="vanilla.css">
+    <script src="vanilla.js"></script>
   </head>
   <body>
     <nav>
@@ -250,6 +41,17 @@
         <textarea id="Input2" placeholder="Input an alphanumeric string..."></textarea>
         <h2>Resulting string:</h2>
         <blockquote id="Output2"></blockquote>
+      </section>
+
+      <section>
+        <h1>Decoding</h1>
+        <aside>
+          This algorithm uses regular expressions to revert the compression. It's useful to test if the
+          other algorithms work properly.
+        </aside>
+        <textarea id="Input3" placeholder="Input a compressed string..."></textarea>
+        <h2>Resulting string:</h2>
+        <blockquote id="Output3"></blockquote>
       </section>
     </main>
   </body>
