@@ -102,12 +102,13 @@ nav a:hover {
   background: #000;
 }
 
+
 main {
   padding: 1rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* overflow-y: scroll; */
+  /* overflow-y: scroll; */ /* Breaks blend mode ToT */
 }
 
 section {

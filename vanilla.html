@@ -7,10 +7,23 @@
   </head>
   <body>
     <nav>
-      <a>String Zipper</a>
+      <a href="#">String Zipper</a>
+      <a href="#regex">Regular Expressions</a>
+      <a href="#array">Array Functions</a>
+      <a href="#decoding">Decoding</a>
     </nav>
+
     <main>
-      <section>
+      <section id="main">
+        <ul>
+          <li><a href="#">String Zipper</a></li>
+          <li><a href="#regex">Regular Expressions</a></li>
+          <li><a href="#array">Array Functions</a></li>
+          <li><a href="#decoding">Decoding</a></li>
+        </ul>
+      </section>
+
+      <section id="regex">
         <h1>Algorithm 1 - Regular Expressions</h1>
         <aside>
           This algorithm uses regular expressions to, first, escape groups of numbers:
@@ -26,7 +39,7 @@
         <blockquote id="Output1"></blockquote>
       </section>
 
-      <section>
+      <section id="array">
         <h1>Algorithm 2 - Array Functions</h1>
         <aside>
           This algorithm uses a reduce function to analyze the string, identify groups of numbers
@@ -43,7 +56,7 @@
         <blockquote id="Output2"></blockquote>
       </section>
 
-      <section>
+      <section id="decoding">
         <h1>Decoding</h1>
         <aside>
           This algorithm uses regular expressions to revert the compression. It's useful to test if the

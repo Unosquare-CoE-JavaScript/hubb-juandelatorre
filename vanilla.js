@@ -1,5 +1,8 @@
+
+const byId = document.getElementById.bind(document);
+const byTag = document.getElementsByTagName.bind(document);
+
 addEventListener('load', () => {
-  const byId = document.getElementById.bind(document);
   byId('Input1').addEventListener('input', ({ target }) => {
     byId('Output1').innerText = target.value
     .replace(/(\d+)/g, '*$1') // Escape groups of numbers
@@ -49,4 +52,22 @@ addEventListener('load', () => {
       .replace(/[a-z]\d+/ig, match => match[0].repeat(+match.substr(1))) // Decompress
       .replace(/\*(\d+)/g, '$1') // Unescape groups of numbers
   });
+
+  selectSection(location.hash.substr(1));
 });
+
+addEventListener('hashchange', () => {
+  selectSection(location.hash.substr(1));
+});
+
+function selectSection (section) {
+  const current = byId(section || 'main');
+
+  for (let element of byTag('section')) {
+    if (element === current) {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+    }
+  }
+}
