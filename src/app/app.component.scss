@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  height: 100vh;
+  background: linear-gradient(60deg, #bed, #bef, #9df 50%);
+}
+
+main {
+  margin: 1rem;
+}
+
+textarea {
+  border: 2px inset #999;
+}
