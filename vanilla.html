@@ -81,16 +81,15 @@
       }
 
       body {
+        background: linear-gradient(90deg, #2c8, #2bc);
         display: flex;
         flex-direction: column;
         height: 100vh;
-        background: linear-gradient(60deg, #2c8, #2bc);
         color: #fffa;
       }
 
       nav {
         display: flex;
-        position: sticky;
         align-items: center;
         justify-content: center;
         background-color: #fffa;
@@ -100,12 +99,12 @@
 
       nav a {
         padding: .5rem 1rem;
-        color: #fffa;
+        color: #000;
       }
 
       nav a:hover {
-        color: #ffff;
-        background: #fffa;
+        color: #fffa;
+        background: #000;
       }
 
       main {
@@ -113,7 +112,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
       }
 
       section {
@@ -173,7 +172,7 @@
           byId('Output1').innerText = target.value
           .replace(/(\d+)/g, '*$1') // Escape groups of numbers
           .replace(/([a-z])\1{2,}/ig, match => match[0] + match.length) // Compress
-        })
+        });
 
         byId('Input2').addEventListener('input', ({ target }) => {
           byId('Output2').innerText = [ ...target.value ]
@@ -211,52 +210,7 @@
                     char.repeat(count) // Leave untouched
             )
             .join('');
-
-        byId('Input3').addEventListener('input', ({ target: { value } }) => {
-          let last = value[0];
-          let output = last;
-
-          for (let index = 1; index++ < value.length;) {
-            const current = value[index];
-
-          }
-          byId('Output3').innerText = [ ...target.value ]
-            .reduce((output, next) => {
-              const index = output.length - 1;
-              const last = output[index];
-              const current = { char: next, count: 1, isNumber: Number.isInteger(+next) };
-
-              if (last.char !== '') {
-                if (current.isNumber) { // Numeric character
-                  if (last.isNumber) {
-                    last.char += next; // Add to the same group
-                  } else {
-                    output.push(current); // Start new group of numbers
-                  }
-                } else if (last.char === next) { // Same character
-                  last.count++;
-                } else {
-                  output.push(current); // Start new group
-                }
-              } else {
-                output[index] = current; // First Character
-              }
-
-              return output;
-            }, [ { char: '', count: 0, isNumber: false } ])
-            .map(
-              (
-                { char, count, isNumber }
-              ) =>
-                isNumber ?
-                  `*${char}` : // Escape groups of numbers
-                  count > 2 ?
-                    `${char}${count}` : // Compress
-                    char.repeat(count) // Leave untouched
-            )
-            .join('');
-        })
-      });
+        });
     </script>
   </head>
   <body>
@@ -283,29 +237,14 @@
       <section>
         <h1>Algorithm 2 - Array Functions</h1>
         <aside>
-          This algorithm uses a reduce function to analyze the string:
-          <code>replace(/(\d+)/g, '*$1')</code>
-          After that, groups of 3 or more identical characters are selected with the following
-          regular expression:
-          <code>/([a-z])\1{2,}/ig</code>
-          And replaced with the character followed by the number of repetitions:
-          <code>match => match[0] + match.length</code>
-        </aside>
-        <textarea id="Input2" placeholder="Input an alphanumeric string..."></textarea>
-        <h2>Resulting string:</h2>
-        <blockquote id="Output2"></blockquote>
-      </section>
-
-      <section>
-        <h1>Algorithm 3 - For Loop</h1>
-        <aside>
-          This algorithm uses a reduce function to analyze the string:
-          <code>replace(/(\d+)/g, '*$1')</code>
-          After that, groups of 3 or more identical characters are selected with the following
-          regular expression:
-          <code>/([a-z])\1{2,}/ig</code>
-          And replaced with the character followed by the number of repetitions:
-          <code>match => match[0] + match.length</code>
+          This algorithm uses a reduce function to analyze the string, identify groups of numbers
+          and groups of identical characters, and save this information in an array of intermediate
+          values:
+          <code>{ char: 'a', count: 3, isNumber: false }</code>
+          Then it maps each group to a string. First escaping numbers:
+          <code>isNumber ? `*${char}` : ...</code>
+          And, then, filtering string longer than 2:
+          <code>... count > 2 ? `${char}${count}` : char.repeat(count)</code>
         </aside>
         <textarea id="Input2" placeholder="Input an alphanumeric string..."></textarea>
         <h2>Resulting string:</h2>
